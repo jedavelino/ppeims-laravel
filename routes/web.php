@@ -18,4 +18,12 @@
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
+/**
+ * Home
+ */
 Route::get('/', 'HomeController@index');
+
+/**
+ * Equipment
+ */
+Route::get('/equipment', 'PagesController@index');

@@ -26,4 +26,5 @@ Route::get('/', 'HomeController@index');
 /**
  * Equipment
  */
-Route::get('/equipment', 'PagesController@index');
+// Route::get('/equipment', 'PagesController@index');
+Route::resource('equipment', 'EquipmentController');

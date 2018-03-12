@@ -20,6 +20,6 @@ class PagesController extends Controller
      * Show the application equipment
      */
     public function index() {
-        return view('pages.equipment');
+        // return view('pages.equipment');
     }
 }

@@ -11,7 +11,9 @@
             <!-- Left Side Of Navbar -->
             @if(!Auth::guest())
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ url('/equipment') }}">Equipment</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('equipment.index') }}">Equipment</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Users</a></li>
             </ul>
             @endif
 

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <a href="{{ route('equipment.index') }}" class="btn btn-outline-secondary mb-5" role="button">Back</a>
-            <h2>Create Equipment</h2>
+            <h2>Edit Equipment</h2>
 
             {!! Form::open(['action' => ['EquipmentController@update', $equipment->id], 'method' => 'PUT']) !!}
 				<div class="form-group">

@@ -60,14 +60,6 @@ class EquipmentController extends Controller
         ]);
 
         /**
-         * If success, create equipment
-         * @todo drop equipments table or
-         *       rollback due to error in
-         *       saving null data
-         * @link https://stackoverflow.com/questions/31229193/how-to-drop-table-in-laravel
-         */
-
-        /**
          * Check if the equipment name already exists
          * @link https://laravel.com/docs/5.6/eloquent#retrieving-aggregates
          */
@@ -119,20 +111,30 @@ class EquipmentController extends Controller
     public function update(Request $request, $id)
     {
         /**
-         * Todo fix the bug
-         * @var [type]
+         * Make sure's the ID is an integer.
          */
         $id = (int)$id;
 
+        /**
+         * Laravel's native validation method.
+         */
         $this->validate($request, [
             'name' => 'required',
             'description' => 'nullable'
         ]);
-
-        if (!Equipment::where([['name', $request->input('name')], ['id', $id]])->count()) {
+        
+        /**
+         * Throws error when an input value has already exists.
+         * Exludes a column with an ID equal to this ID.
+         * Redirects back to the edit form.
+         */
+        if (Equipment::where('name', $request->input('name'))->whereNotIn('id', [$id])->exists()) {
             return redirect()->back()->with('error', $request->input('name') . ' already exist.');
         }
 
+        /**
+         * Updates the record if no error.
+         */
         $equipment = Equipment::find($id);
         $equipment->name = $request->input('name');
         $equipment->description = $request->input('description');

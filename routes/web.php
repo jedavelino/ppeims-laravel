@@ -28,3 +28,5 @@ Route::get('/home', 'HomeController@index')->name('home');
  */
 // Route::get('/equipment', 'PagesController@index');
 Route::resource('equipment', 'EquipmentController');
+Route::resource('department', 'DepartmentController');
+Route::resource('employee', 'EmployeeController');

@@ -13,6 +13,10 @@
 					{{ Form::text('name', $equipment->name, ['class' => 'form-control', 'autofocus']) }}
 				</div>
 				<div class="form-group">
+					{{ Form::label('unit', 'Unit') }}
+					{{ Form::select('unit', ['pc' => 'Piece', 'pair' => 'Pair', 'set' => 'Set'], $equipment->unit, ['class' => 'form-control','placeholder' => 'Select a unit']) }}
+				</div>
+				<div class="form-group">
 					{{ Form::label('description', 'Description (Optional)') }}
 					{{ Form::textarea('description', $equipment->description, ['class' => 'form-control']) }}
 				</div>

@@ -24,8 +24,6 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        // print_r(Equipment::all());
-        // return Equipment::all();
         $equipment = Equipment::orderBy('name', 'asc')->paginate(10);
 
         return view('equipment.index')->with('equipment', $equipment);
@@ -56,6 +54,7 @@ class EquipmentController extends Controller
          */
         $this->validate($request, [
             'name' => 'required',
+            'unit' => 'required',
             'description' => 'nullable'
         ]);
 
@@ -69,6 +68,7 @@ class EquipmentController extends Controller
 
         $equipment = new Equipment;
         $equipment->name = $request->input('name');
+        $equipment->unit = $request->input('unit');
         $equipment->description = $request->input('description');
         $equipment->save();
 
@@ -86,6 +86,7 @@ class EquipmentController extends Controller
         $equipment = Equipment::find($id);
 
         return view('equipment.show')->with('equipment', $equipment);
+        // return response()->json($equipment);
     }
 
     /**
@@ -111,15 +112,11 @@ class EquipmentController extends Controller
     public function update(Request $request, $id)
     {
         /**
-         * Make sure's the ID is an integer.
-         */
-        $id = (int)$id;
-
-        /**
          * Laravel's native validation method.
          */
         $this->validate($request, [
             'name' => 'required',
+            'unit' => 'required',
             'description' => 'nullable'
         ]);
         
@@ -137,6 +134,7 @@ class EquipmentController extends Controller
          */
         $equipment = Equipment::find($id);
         $equipment->name = $request->input('name');
+        $equipment->unit = $request->input('unit');
         $equipment->description = $request->input('description');
         $equipment->save();
 
@@ -151,8 +149,6 @@ class EquipmentController extends Controller
      */
     public function destroy($id)
     {
-        $id = (int)$id;
-
         $equipment = Equipment::find($id);
         $equipment->delete();
 

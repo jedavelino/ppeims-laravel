@@ -13,7 +13,8 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('equipment.index') }}">Equipment</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Users</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('department.index') }}">Department</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('employee.index') }}">Employee</a></li>
             </ul>
             @endif
 

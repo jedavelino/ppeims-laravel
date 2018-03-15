@@ -36,6 +36,23 @@ $('#confirm-delete-department').on('hide.bs.modal', function(e) {
 	$(this).find('.modal-body').children().remove();
 });
 
+$('#confirm-delete-employee').on('show.bs.modal', function(e) {
+
+	var id = $(e.relatedTarget).data('id');
+	var action = $(this).find('form').attr('action');
+	var name = $(e.relatedTarget).data('name');
+
+	$(this).find('form').attr('action', action + '/' + id);
+	$(this).find('.modal-title').text('Delete ' + name);
+	$(this).find('.modal-body').html('<p>Are you sure you want to delete '+ name +'?</p>');
+});
+
+$('#confirm-delete-employee').on('hide.bs.modal', function(e) {
+	$(this).find('form').attr('action', '');
+	$(this).find('.modal-title').text('');
+	$(this).find('.modal-body').children().remove();
+});
+
 // $('#confirm-equipment-delete-modal').on('show.bs.modal', function(e) {
 
 // 	var id = $(e.relatedTarget).data('id');

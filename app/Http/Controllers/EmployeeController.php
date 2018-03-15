@@ -57,7 +57,7 @@ class EmployeeController extends Controller
         ]);
         
         $employee = new Employee;
-        $employee->name = $request->input('first_name') . ';' . $request->input('last_name') . ';' . $request->input('middle_name');
+        $employee->name = $request->input('last_name') . ';' . $request->input('first_name') . ';' . $request->input('middle_name');
         $employee->save();
 
         return redirect()->route('employee.index')->with('success', $request->input('name') . ' created.');

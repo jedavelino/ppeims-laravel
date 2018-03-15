@@ -22,7 +22,10 @@
                         @foreach($employee as $item)
                             <tr>
                                 <td>
-                                    {{ $item->name }}
+                                    @php 
+                                        $name = explode(';', $item->name);
+                                        echo $name[0] . ', ' . $name[1] . ' ' . $name[2];
+                                    @endphp
                                 </td>
                                 <td>{{ $item->updated_at->format('F j, Y') }}</td>
                                 <td>

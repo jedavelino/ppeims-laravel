@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Department;
 
 class DepartmentController extends Controller
@@ -47,22 +48,15 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        /**
-         * Validate form fields
-         */
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:departments',
             'description' => 'nullable'
         ]);
 
-        if (Department::where('name', $request->input('name'))->exists()) {
-            return redirect()->back()->with('error', $request->input('name') . ' already exist.');
-        }
-
-        $department = new Department;
-        $department->name = $request->input('name');
-        $department->description = $request->input('description');
-        $department->save();
+        Department::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description')
+        ]);
 
         return redirect()->route('department.index')->with('success', $request->input('name') . ' created.');
     }
@@ -103,18 +97,14 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => ['required', Rule::unique('departments')->ignore($id)],
             'description' => 'nullable'
         ]);
 
-        if (Department::where('name', $request->input('name'))->whereNotIn('id', [$id])->exists()) {
-            return redirect()->back()->with('error', $request->input('name') . ' already exist.');
-        }
-
-        $department = Department::find($id);
-        $department->name = $request->input('name');
-        $department->description = $request->input('description');
-        $department->save();
+        Department::find($id)->update([
+            'name' => $request->input('name'),
+            'description' => $request->input('description')
+        ]);
 
         return redirect()->route('department.index')->with('success', $request->input('name') . ' updated.');
     }
@@ -127,8 +117,7 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        $department = Department::find($id);
-        $department->delete();
+        Department::find($id)->delete();
 
         return redirect()->route('department.index')->with('success', 'Equipment successfully deleted.');
     }

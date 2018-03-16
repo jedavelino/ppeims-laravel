@@ -21,13 +21,8 @@
                     <tbody>
                         @foreach($employee as $item)
                             <tr>
-                                <td>
-                                    @php 
-                                        $name = explode(';', $item->name);
-                                        echo $name[0] . ', ' . $name[1] . ' ' . $name[2];
-                                    @endphp
-                                </td>
-                                <td>{{ $item->updated_at->format('F j, Y') }}</td>
+                                <td>{{ _prettyName($item->name) }}</td>
+                                <td>{{ _prettyDate($item->updated_at) }}</td>
                                 <td>
                                     <a class="btn btn-outline-info btn-sm" href="/employee/{{ $item->id }}" role="button"><i class="fas fa-eye"></i></a>
                                     <a class="btn btn-outline-success btn-sm" href="/employee/{{ $item->id }}/edit" role="button"><i class="fas fa-edit"></i></a>
@@ -35,7 +30,7 @@
                                         data-toggle="modal"
                                         data-target="#confirm-delete-employee"
                                         data-id="{{ $item->id }}"
-                                        data-name="{{ $item->name }}">
+                                        data-name="{{ _prettyName($item->name) }}">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </td>

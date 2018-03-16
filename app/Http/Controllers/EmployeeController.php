@@ -44,23 +44,24 @@ class EmployeeController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     *
+     * regex that allows alphabet and spaces /^[A-Za-z ]+$/
      */
     public function store(Request $request)
     {
-        /**
-         * Validate form fields
-         */
         $this->validate($request, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'middle_name' => 'required',
+            'first_name' => 'required|regex:/^[A-Za-z ]+$/',
+            'last_name' => 'required|regex:/^[A-Za-z ]+$/',
+            'middle_name' => 'required|regex:/^[A-Za-z ]+$/',
         ]);
+
+        $joined_name = $request->input('last_name') . ';' . $request->input('first_name') . ';' . $request->input('middle_name');
         
         $employee = new Employee;
-        $employee->name = $request->input('last_name') . ';' . $request->input('first_name') . ';' . $request->input('middle_name');
+        $employee->name = $joined_name;
         $employee->save();
 
-        return redirect()->route('employee.index')->with('success', $request->input('name') . ' created.');
+        return redirect()->route('employee.index')->with('success', _prettyName($joined_name) . ' created.');
     }
 
     /**
@@ -82,7 +83,7 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('employee.edit')->with('employee', Employee::find($id));
     }
 
     /**
@@ -94,7 +95,19 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'first_name' => 'required|regex:/^[A-Za-z ]+$/',
+            'last_name' => 'required|regex:/^[A-Za-z ]+$/',
+            'middle_name' => 'required|regex:/^[A-Za-z ]+$/',
+        ]);
+
+        $joined_name = $request->input('last_name') . ';' . $request->input('first_name') . ';' . $request->input('middle_name');
+        
+        $employee = Employee::find($id);
+        $employee->name = $joined_name;
+        $employee->save();
+
+        return redirect()->route('employee.index')->with('success', _prettyName($joined_name) . ' updated.');
     }
 
     /**
@@ -105,6 +118,8 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Employee::find($id)->delete();
+
+        return redirect()->route('employee.index')->with('success', 'Employee successfully deleted.');
     }
 }

@@ -12,4 +12,12 @@ class Department extends Model
      * @var  array
      */
     protected $fillable = ['name', 'description'];
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function employees()
+    {
+        return $this->hasMany('App\Employee');
+    }
 }

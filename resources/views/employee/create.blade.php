@@ -15,12 +15,15 @@
 					</div>
 					<div class="col">
 						{{ Form::label('name', 'First Name') }}
-						{{ Form::text('first_name', '', ['class' => 'form-control', 'autofocus']) }}
+						{{ Form::text('first_name', '', ['class' => 'form-control']) }}
 					</div>
 					<div class="col">
 						{{ Form::label('name', 'Middle Name') }}
 						{{ Form::text('middle_name', '', ['class' => 'form-control']) }}
 					</div>
+				</div>
+				<div class="form-group">
+					{{ Form::select('department', $options, null, ['placeholder' => 'Select a Department', 'class' => 'form-control']) }}
 				</div>
 				<div class="form-group">
 					{{ Form::submit('Submit', ['class' => 'btn btn-outline-success']) }}

@@ -11,11 +11,11 @@
 				<div class="form-row form-group">
 					<div class="col">
 						{{ Form::label('name', 'Last Name') }}
-						{{ Form::text('last_name', _getNameByIndex($employee->name, 0), ['class' => 'form-control']) }}
+						{{ Form::text('last_name', _getNameByIndex($employee->name, 0), ['class' => 'form-control', 'autofocus']) }}
 					</div>
 					<div class="col">
 						{{ Form::label('name', 'First Name') }}
-						{{ Form::text('first_name', _getNameByIndex($employee->name, 1), ['class' => 'form-control', 'autofocus']) }}
+						{{ Form::text('first_name', _getNameByIndex($employee->name, 1), ['class' => 'form-control']) }}
 					</div>
 					<div class="col">
 						{{ Form::label('name', 'Middle Name') }}

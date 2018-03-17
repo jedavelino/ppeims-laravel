@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Employee;
+use App\Department;
 
 class EmployeeController extends Controller
 {
@@ -36,7 +37,14 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employee.create');
+        $departments = Department::orderBy('name', 'asc')->get();
+        $options = [];
+
+        foreach($departments as $department) {
+            $options[$department->id] = $department->name;
+        }
+
+        return view('employee.create')->with('options', $options);
     }
 
     /**
@@ -49,6 +57,10 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        /**
+         * Todo, do something to save the department
+         */
+
         $this->validate($request, [
             'first_name' => 'required|regex:/^[A-Za-z ]+$/',
             'last_name' => 'required|regex:/^[A-Za-z ]+$/',

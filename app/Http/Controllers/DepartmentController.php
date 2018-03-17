@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Department;
+use App\Employee;
 
 class DepartmentController extends Controller
 {
@@ -70,8 +71,9 @@ class DepartmentController extends Controller
     public function show($id)
     {
         $department = Department::find($id);
+        // $employees = Employee::where('employee_id', 1)->get();
 
-        return view('department.show')->with('department', $department);
+        return view('department.show', ['department' => $department]);
     }
 
     /**

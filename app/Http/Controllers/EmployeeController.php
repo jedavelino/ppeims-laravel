@@ -62,10 +62,6 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        /**
-         * Todo, do something to save the department
-         */
-
         $this->validate($request, [
             'first_name' => 'required|regex:/^[A-Za-z ]+$/',
             'last_name' => 'required|regex:/^[A-Za-z ]+$/',
@@ -80,7 +76,7 @@ class EmployeeController extends Controller
         $employee->department_id = $request->input('department');
         $employee->save();
 
-        return redirect()->route('employee.index')->with('success', _prettyName($joined_name) . ' created.');
+        return redirect()->route('employee.index')->with('success', prettyName($joined_name) . ' created.');
     }
 
     /**
@@ -91,7 +87,12 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $employee = Employee::find($id);
+        $department = Employee::find($id)->department;
+
+        $employee->department = $department->name;
+
+        return view('employee.show')->with('employee', $employee);
     }
 
     /**
@@ -102,7 +103,9 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        return view('employee.edit')->with('employee', Employee::find($id));
+        $employee = Employee::find($id);
+
+        return view('employee.edit')->with('employee', $employee);
     }
 
     /**

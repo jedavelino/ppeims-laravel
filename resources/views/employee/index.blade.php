@@ -15,7 +15,6 @@
                         <tr>
                             <th>Name</th>
                             <th>Department</th>
-                            <th>Last Updated</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -24,7 +23,6 @@
                             <tr>
                                 <td>{{ $employee->name }}</td>
                                 <td>{{ $employee->department }}</td>
-                                <td>{{ _prettyDate($employee->updated_at) }}</td>
                                 <td>
                                     <a class="btn btn-outline-info btn-sm" href="/employee/{{ $employee->id }}" role="button"><i class="fas fa-eye"></i></a>
                                     <a class="btn btn-outline-success btn-sm" href="/employee/{{ $employee->id }}/edit" role="button"><i class="fas fa-edit"></i></a>

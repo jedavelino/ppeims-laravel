@@ -71,8 +71,15 @@ class DepartmentController extends Controller
     public function show($id)
     {
         $department = Department::find($id);
+        $employees = Department::find($id)->employees;
 
-        return view('department.show', ['department' => $department]);
+        foreach ($employees as $employee) {
+            $employee->name = prettyName($employee->name);
+        }
+
+        return view('department.show')
+            ->with('department', $department)
+            ->with('employees', $employees);
     }
 
     /**

@@ -28,6 +28,7 @@ class EmployeeController extends Controller
         $employees = Employee::orderBy('name', 'asc')->paginate(10);
 
         foreach ($employees as $employee) {
+            $employee->name = prettyName($employee->name);
             $employee->department = Department::find($employee->department_id)->name;
         }
 

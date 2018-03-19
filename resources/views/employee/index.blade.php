@@ -22,7 +22,7 @@
                     <tbody>
                         @foreach($employees as $employee)
                             <tr>
-                                <td>{{ _prettyName($employee->name) }}</td>
+                                <td>{{ $employee->name }}</td>
                                 <td>{{ $employee->department }}</td>
                                 <td>{{ _prettyDate($employee->updated_at) }}</td>
                                 <td>
@@ -32,7 +32,7 @@
                                         data-toggle="modal"
                                         data-target="#confirm-delete-employee"
                                         data-id="{{ $employee->id }}"
-                                        data-name="{{ _prettyName($employee->name) }}">
+                                        data-name="{{ $employee->name }}">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </td>

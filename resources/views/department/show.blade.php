@@ -6,7 +6,8 @@
         <div class="col-md-8">
             <a href="{{ route('department.index') }}" class="btn btn-outline-secondary mb-2" role="button">Back</a>
             <h2>{{ $department->name }}</h2>
-            <div class="table-responsive">
+            <p>TODO: Show all employees in this department.</p>
+            {{-- <div class="table-responsive">
                 <table class="table table-sm">
                 <thead>
                     <tr>
@@ -19,7 +20,7 @@
                     </tr>
                 </tbody>
                 </table>
-            </div>
+            </div> --}}
             {{--  @if(count($employees))
                 <div class="table-responsive">
                     <table class="table table-sm">

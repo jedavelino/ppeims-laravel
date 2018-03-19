@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     /**
-     * Get the department record associated with the employee.
+     * Get the department that this employee
+     * belongs to.
      */
     public function department()
     {

@@ -25,9 +25,13 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employee = Employee::orderBy('name', 'asc')->paginate(10);
+        $employees = Employee::orderBy('name', 'asc')->paginate(10);
 
-        return view('employee.index')->with('employee', $employee);
+        foreach ($employees as $employee) {
+            $employee->department = Department::find($employee->department_id)->name;
+        }
+
+        return view('employee.index')->with('employees', $employees);
     }
 
     /**
@@ -65,12 +69,14 @@ class EmployeeController extends Controller
             'first_name' => 'required|regex:/^[A-Za-z ]+$/',
             'last_name' => 'required|regex:/^[A-Za-z ]+$/',
             'middle_name' => 'required|regex:/^[A-Za-z ]+$/',
+            'department' => 'required'
         ]);
 
         $joined_name = $request->input('last_name') . ';' . $request->input('first_name') . ';' . $request->input('middle_name');
         
         $employee = new Employee;
         $employee->name = $joined_name;
+        $employee->department_id = $request->input('department');
         $employee->save();
 
         return redirect()->route('employee.index')->with('success', _prettyName($joined_name) . ' created.');

@@ -14,7 +14,7 @@ class Department extends Model
     protected $fillable = ['name', 'description'];
 
     /**
-     * Get the comments for the blog post.
+     * Get the employees of this department.
      */
     public function employees()
     {

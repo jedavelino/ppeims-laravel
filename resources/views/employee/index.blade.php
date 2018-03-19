@@ -6,31 +6,33 @@
         <div class="col-md-8">
             <a class="btn btn-outline-primary mb-5" href="{{ route('employee.create') }}" role="button">Create</a>
 
-            <h4 class="mb-2">Eemployee</h4>
+            <h4 class="mb-2">Employees</h4>
 
-            @if(count($employee))
+            @if(count($employees))
                 <div class="table-responsive">
                     <table class="table table-sm">
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Department</th>
                             <th>Last Updated</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($employee as $item)
+                        @foreach($employees as $employee)
                             <tr>
-                                <td>{{ _prettyName($item->name) }}</td>
-                                <td>{{ _prettyDate($item->updated_at) }}</td>
+                                <td>{{ _prettyName($employee->name) }}</td>
+                                <td>{{ $employee->department }}</td>
+                                <td>{{ _prettyDate($employee->updated_at) }}</td>
                                 <td>
-                                    <a class="btn btn-outline-info btn-sm" href="/employee/{{ $item->id }}" role="button"><i class="fas fa-eye"></i></a>
-                                    <a class="btn btn-outline-success btn-sm" href="/employee/{{ $item->id }}/edit" role="button"><i class="fas fa-edit"></i></a>
+                                    <a class="btn btn-outline-info btn-sm" href="/employee/{{ $employee->id }}" role="button"><i class="fas fa-eye"></i></a>
+                                    <a class="btn btn-outline-success btn-sm" href="/employee/{{ $employee->id }}/edit" role="button"><i class="fas fa-edit"></i></a>
                                     <button class="btn btn-outline-danger btn-sm" role="button"
                                         data-toggle="modal"
                                         data-target="#confirm-delete-employee"
-                                        data-id="{{ $item->id }}"
-                                        data-name="{{ _prettyName($item->name) }}">
+                                        data-id="{{ $employee->id }}"
+                                        data-name="{{ _prettyName($employee->name) }}">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
@@ -39,7 +41,7 @@
                     </tbody>
                     </table>
                 </div>
-                {{ $employee->links() }}
+                {{ $employees->links() }}
             @else
                 <h3>No employee added.</h3>
             @endif

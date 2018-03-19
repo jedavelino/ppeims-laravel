@@ -10,12 +10,12 @@
             {!! Form::open(['action' => 'EmployeeController@store']) !!}
 				<div class="form-row form-group">
 					<div class="col">
-						{{ Form::label('name', 'Last Name') }}
-						{{ Form::text('last_name', '', ['class' => 'form-control']) }}
-					</div>
-					<div class="col">
 						{{ Form::label('name', 'First Name') }}
 						{{ Form::text('first_name', '', ['class' => 'form-control']) }}
+					</div>
+					<div class="col">
+						{{ Form::label('name', 'Last Name') }}
+						{{ Form::text('last_name', '', ['class' => 'form-control']) }}
 					</div>
 					<div class="col">
 						{{ Form::label('name', 'Middle Name') }}

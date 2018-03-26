@@ -80,7 +80,7 @@ class EmployeeController extends Controller
         $employee->department_id = $request->input('department');
         $employee->save();
 
-        return redirect()->route('employee.index')->with('success', _prettyName($joined_name) . ' created.');
+        return redirect()->route('employee.index')->with('success', prettyName($joined_name) . ' created.');
     }
 
     /**
@@ -91,7 +91,10 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $employee = Employee::find($id);
+        $employee->name = prettyName($employee->name);
+
+        return view('employee.show')->with('employee', $employee);
     }
 
     /**
@@ -126,7 +129,7 @@ class EmployeeController extends Controller
         $employee->name = $joined_name;
         $employee->save();
 
-        return redirect()->route('employee.index')->with('success', _prettyName($joined_name) . ' updated.');
+        return redirect()->route('employee.index')->with('success', prettyName($joined_name) . ' updated.');
     }
 
     /**

@@ -62,10 +62,6 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        /**
-         * Todo, do something to save the department
-         */
-
         $this->validate($request, [
             'first_name' => 'required|regex:/^[A-Za-z ]+$/',
             'last_name' => 'required|regex:/^[A-Za-z ]+$/',
@@ -93,6 +89,9 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
         $employee->name = prettyName($employee->name);
+        $department = Employee::find($id)->department;
+
+        $employee->department = $department->name;
 
         return view('employee.show')->with('employee', $employee);
     }
@@ -105,7 +104,9 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        return view('employee.edit')->with('employee', Employee::find($id));
+        $employee = Employee::find($id);
+
+        return view('employee.edit')->with('employee', $employee);
     }
 
     /**

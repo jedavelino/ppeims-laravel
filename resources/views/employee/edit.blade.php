@@ -15,12 +15,15 @@
 					</div>
 					<div class="col">
 						{{ Form::label('name', 'Last Name') }}
-						{{ Form::text('last_name', _getNameByIndex($employee->name, 0), ['class' => 'form-control', 'autofocus']) }}
+						{{ Form::text('last_name', _getNameByIndex($employee->name, 0), ['class' => 'form-control']) }}
 					</div>
 					<div class="col">
 						{{ Form::label('name', 'Middle Name') }}
 						{{ Form::text('middle_name', _getNameByIndex($employee->name, 2), ['class' => 'form-control']) }}
 					</div>
+				</div>
+				<div class="form-group">
+					{{ Form::select('department', $options, $employee->department_id, ['placeholder' => 'Select a Department', 'class' => 'form-control']) }}
 				</div>
 				<div class="form-group">
 					{{ Form::submit('Submit', ['class' => 'btn btn-outline-success']) }}

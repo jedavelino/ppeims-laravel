@@ -106,7 +106,14 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
 
-        return view('employee.edit')->with('employee', $employee);
+        $departments = Department::orderBy('name', 'asc')->get();
+        $options = [];
+
+        foreach($departments as $department) {
+            $options[$department->id] = $department->name;
+        }
+
+        return view('employee.edit')->with('employee', $employee)->with('options', $options);
     }
 
     /**
@@ -122,12 +129,14 @@ class EmployeeController extends Controller
             'first_name' => 'required|regex:/^[A-Za-z ]+$/',
             'last_name' => 'required|regex:/^[A-Za-z ]+$/',
             'middle_name' => 'required|regex:/^[A-Za-z ]+$/',
+            'department' => 'required'
         ]);
 
         $joined_name = $request->input('last_name') . ';' . $request->input('first_name') . ';' . $request->input('middle_name');
         
         $employee = Employee::find($id);
         $employee->name = $joined_name;
+        $employee->department_id = $request->input('department');
         $employee->save();
 
         return redirect()->route('employee.index')->with('success', prettyName($joined_name) . ' updated.');

@@ -30,4 +30,3 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('equipment', 'EquipmentController');
 Route::resource('department', 'DepartmentController');
 Route::resource('employee', 'EmployeeController');
-Route::resource('inventory', 'InventoryController');

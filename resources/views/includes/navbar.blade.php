@@ -15,6 +15,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('equipment.index') }}">Equipment</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('department.index') }}">Department</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('employee.index') }}">Employee</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('receive.index') }}">Receive</a></li>
                 {{-- <li class="nav-item"><a class="nav-link" href="{{ route('inventory.index') }}">Inventory</a></li> --}}
             </ul>
             @endif
